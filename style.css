@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 35px 35px;
+    height: 100vh;
+    background: url(assets/pokeball_gray.png) no-repeat;
+    background-size: 150px;
+    background-position: top right -75px;
+    background-color: rgb(255, 255, 255);
+}
+
+.headerApp {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    width: 100%;
+}
+
+.searchBar {
+    width: 100%;
+}
+
+#searchText {
+    border: none;
+    width: 85%;
+    line-height: 38px;
+    border-radius: 28px;
+    padding: 10px 0px 10px 45px;
+    background: url(assets/magnifying.png) no-repeat scroll 12px 17px;
+    background-size: 22px;
+    background-color: #F5F5F5;
+    font-size: 14px;
+}
+
+.mainLinks {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 40px;
+}
+
+#pokedex {
+    background-color: #4EC2A7;
+    box-shadow: 0px 5px 8px #4ec2a7d5 ;
+}
+
+#Moves {
+    background-color: #F7796B;
+    box-shadow: 0px 5px 8px #f7796bc7;
+}
+
+#Abilities {
+    background-color: #57ABF6;
+    box-shadow: 0px 5px 8px #57acf6b4;
+}
+
+#Items {
+    background-color: #FFCF4A;
+    box-shadow: 0px 5px 8px #ffcf4abd;
+}
+
+#Locations {
+    background-color: #7D528D;
+    box-shadow: 0px 5px 8px #7D528D;
+}
+
+#TypeCharts {
+    background-color: #B2746C;
+    box-shadow: 0px 5px 8px #b2746ccc;
+}
+
+button {
+    background: url(assets/pokeball_gray_left.png) no-repeat;
+    background-position: center right;
+    background-size: 52px;
+    padding: 20px;
+    width: 48%;
+    border-radius: 15px;
+    border: none;
+    line-height: 2em;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    color: white;
+    text-align: left;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(10px);
+    transition-duration: 500ms;
+}
