@@ -2,11 +2,17 @@ const backArrowButton = document.getElementById('backArrow');
 const loader = document.querySelector('.loader');
 const mainDiv = document.getElementById('mainDiv');
 const errorDiv = document.getElementById('errorMessage');
+const searchIcon = document.getElementById('search_button');
+const searchBarDiv = document.getElementById('pokedexSearchBarDiv');
+const searchBarInput = document.getElementById('pokedexSearchText');
 const body = document.body;
 let isLoading = false;
 let isOnError = false;
+let isSearchBarDisplayed = false;
+let isInitialLoading = true;
 let currentPokemons = [];
-const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
+const BASE_API_URL = "http://127.0.0.1:8081";
+//const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
 
 function backHome () {
   window.location.href = '../index.html';
@@ -47,36 +53,6 @@ const getPrimaryType = (pokemonTypes) => {
   return pokemonTypes[0].type.name;
 }
 
-async function getPokemon() {
-  if (!isLoading)
-    if(!isOnError) {
-      try {
-        showLoader();
-  
-        const response = await fetch(`${BASE_API_URL}/api/pokemon?offset=${currentPokemons.length}`);
-        const fetchedPokemon = await response.json();
-        let pokemonsCards = '';
-  
-        currentPokemons = currentPokemons.concat(fetchedPokemon.spritesArray);
-  
-        if (currentPokemons) {
-          currentPokemons.forEach(pokemon => {
-            pokemonsCards += createCard(pokemon);
-          });
-  
-          mainDiv.innerHTML = pokemonsCards;
-        }
-      } catch (error) {
-        showError();
-        throw new Error('Error while fetching from PokemonApi:', error);
-      } finally {
-        hideLoader();
-      }
-    } else {
-      showError();
-    }
-}
-
 function showLoader() {
   isLoading = true;
   loader.style.display = 'block';
@@ -95,6 +71,90 @@ function showError() {
   body.style.overflow = 'hidden';
 }
 
+const createPokemonCardsList = (pokemonArray) => {
+  let pokemonsCards = '';
+  pokemonArray.forEach(pokemon => {
+    pokemonsCards += createCard(pokemon);
+  });
+
+  return pokemonsCards;
+}
+
+const toggleSearchBarVisibility = () => {
+  if(isSearchBarDisplayed) {
+    searchBarDiv.style.display = 'none';
+    isSearchBarDisplayed = false;
+  } else {
+    searchBarDiv.style.display = 'block';
+    isSearchBarDisplayed = true;
+  }
+};
+
+const handleEnterKeyPress = () => {
+  getPokemonByName(searchBarInput.value);
+}
+
+async function getPokemon() {
+  if (!isLoading)
+    if(!isOnError) {
+      try {
+        showLoader();
+  
+        const response = await fetch(`${BASE_API_URL}/api/pokemon?offset=${currentPokemons.length}`);
+        const fetchedPokemon = await response.json();
+  
+        currentPokemons = currentPokemons.concat(fetchedPokemon.spritesArray);
+  
+        if (currentPokemons) {
+          mainDiv.innerHTML = createPokemonCardsList(currentPokemons);
+        }
+
+      } catch (error) {
+        showError();
+        throw new Error('Error while fetching from PokemonApi:', error);
+      } finally {
+        hideLoader();
+      }
+    } else {
+      showError();
+    }
+}
+
+async function getPokemonByName(pokemonName) {
+  if(!isLoading) {
+    if(!isOnError) {
+      try {
+        showLoader();
+
+        const response = await fetch(`${BASE_API_URL}/api/pokemon/search?name=${pokemonName}`);
+        const fetchedPokemon = await response.json();
+
+        currentPokemons = fetchedPokemon.spritesArray;
+
+        if(currentPokemons) {
+          mainDiv.innerHTML = createPokemonCardsList(currentPokemons);
+        }
+
+      } catch (error) {
+        throw new Error(error);
+      } finally {
+        hideLoader();
+      }
+    }
+  }
+};
+
+searchIcon.addEventListener('click', () => {
+  toggleSearchBarVisibility();
+});
+
+searchBarInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    handleEnterKeyPress();
+  }
+});
+
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY || window.pageYOffset;
   const windowHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -108,4 +168,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-getPokemon();
+if(isInitialLoading) {
+  getPokemon();
+  isInitialLoading = false;
+}

@@ -14,11 +14,15 @@
     <div class="p-20 mainApp">
         <nav class="flex space-between align-center">
             <h3 id="backArrow" class="pointer" onclick="backHome()">&larr;</h3>
-            <img class="menuIcon pointer" src="../assets/list.png" alt="list_menu_icon">
+            <img class="menuIcon pointer" src="../assets/search.png" alt="search_icon" id="search_button">
         </nav>
         <header class="pb-20">
             <h1>Pokedex</h1>
         </header>
+
+        <section class="searchBar" id="pokedexSearchBarDiv">
+            <input type="text" name="searchText" id="pokedexSearchText" placeholder="Search for a Pokémon (Provide at least 3 chars)">
+        </section>
         <section class="flex space-around wrap" id="mainDiv">
             
         </section>
