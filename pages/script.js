@@ -11,8 +11,8 @@ let isOnError = false;
 let isSearchBarDisplayed = false;
 let isInitialLoading = true;
 let currentPokemons = [];
-const BASE_API_URL = "http://127.0.0.1:8081";
-//const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
+//const BASE_API_URL = "http://127.0.0.1:8081";
+const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
 
 function backHome () {
   window.location.href = '../index.html';
