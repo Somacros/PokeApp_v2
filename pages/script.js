@@ -6,7 +6,7 @@ const body = document.body;
 let isLoading = false;
 let isOnError = false;
 let currentPokemons = [];
-const BASE_URL_AWS = "http://18.222.115.247";
+const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
 
 function backHome () {
   window.location.href = '../index.html';
@@ -53,7 +53,7 @@ async function getPokemon() {
       try {
         showLoader();
   
-        const response = await fetch(`${BASE_URL_AWS}/api/pokemon?offset=${currentPokemons.length}`);
+        const response = await fetch(`${BASE_API_URL}/api/pokemon?offset=${currentPokemons.length}`);
         const fetchedPokemon = await response.json();
         let pokemonsCards = '';
   
