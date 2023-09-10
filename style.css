@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
-    height: 100vh;
     background-color: #F5F5F5;
 }
 
@@ -103,6 +104,78 @@ body {
     font-size: 12px;
 }
 
+.bg-grass {
+    background-color: #44C7A7;
+}
+
+.bg-fire {
+    background-color: #FB6C6C;
+}
+
+.bg-water {
+    background-color: #71B8FA;
+}
+
+.bg-electric {
+    background-color: #FFCE4B;
+}
+
+.bg-bug {
+    background-color: #A8B820;
+}
+
+.bg-normal {
+    background-color: #A8A878;
+}
+
+.bg-ice {
+    background-color: #98D8D8;
+}
+
+.bg-ground {
+    background-color: #E0C068;
+}
+
+.bg-flying {
+    background-color: #A890F0;
+}
+
+.bg-poison {
+    background-color: #A040A0;
+}
+
+.bg-fighting {
+    background-color: #C03028;
+}
+
+.bg-psychic {
+    background-color: #F85888;
+}
+
+.bg-dark {
+    background-color: #705848;
+}
+
+.bg-rock {
+    background-color: #B8A038;
+}
+
+.bg-ghost {
+    background-color: #705898;
+}
+
+.bg-steel {
+    background-color: #B8B8D0;
+}
+
+.bg-dragon {
+    background-color: #7038F8;
+}
+
+.bg-fairy {
+    background-color: #FFAEC9;
+}
+
 .separator {
     margin-bottom: 10px;
     border-bottom: 1px solid gray;
@@ -153,6 +226,8 @@ body {
     position: absolute;
     right: 0;
     bottom: 0;
+    max-width: 100px;
+    aspect-ratio: 1/1;
 }
 
 .menuIcon {
@@ -163,11 +238,12 @@ body {
 .pokemon {
     margin-bottom: 15px;
     border-radius: 12px;
-    background: url(assets/pokeball_gray.png) no-repeat;
-    background-color: #44C7A7;
-    background-size: 80px;
+    background-image: url(assets/pokeball_gray.png);
+    background-repeat: no-repeat;
+    background-size: 120px;
     background-position: bottom right;
     box-shadow: 0px 3px 3px #44c7a654;
+    width: 40%;
 }
 
 .pokemon p {
@@ -175,6 +251,46 @@ body {
     text-align: center;
     border-radius: 14px;
 }
+
+.loader {
+    display: none;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.loader h3 {
+    color: white;
+}
+
+#errorMessage {
+    font-family: 'Roboto';
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    padding: 100%;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    z-index: 9998;
+}
+
+#errorMessage img {
+    width: 200px;
+}
+
+#backArrow2 {
+    font-size: 32px;
+    margin-bottom: 100px;
+    font-weight: bolder;
+}
+
 
 #pokedex {
     background-color: #4EC2A7;
@@ -230,4 +346,28 @@ button:hover {
 button:active {
     transform: translateY(10px);
     transition-duration: 500ms;
+}
+
+@media (min-width: 0px) {
+    .pokemon {
+        width: 80%;
+    }
+}
+
+@media (min-width: 500px) {
+    .pokemon {
+        width: 45%;
+    }
+}
+
+@media (min-width:800px) {
+    .pokemon {
+        width: 25%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .pokemon {
+        width: 20%;
+    }
 }

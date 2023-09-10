@@ -7,78 +7,32 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+    <div class="loader">
+        <lottie-player src="../assets/pokeball_loader.json" background="transparent"  speed="2"  style="width: 150px; height: 150px;" loop autoplay></lottie-player>
+        <h3>Loading more Pokemon...</h3>
+    </div>
     <div class="p-20 mainApp">
         <nav class="flex space-between align-center">
-            <h3 id="backArrow" class="pointer">&larr;</h3>
+            <h3 id="backArrow" class="pointer" onclick="backHome()">&larr;</h3>
             <img class="menuIcon pointer" src="../assets/list.png" alt="list_menu_icon">
         </nav>
         <header class="pb-20">
             <h1>Pokedex</h1>
         </header>
-        <section class="flex space-around wrap">
-            <article class="pokemon flex w-40 p-10 space-between white pointer">
-                <div>
-                    <h3>Bulbasaur</h3>
-                    <p>Plant</p>
-                    <p>Poison</p>
-                </div>
-                <div class="w-30 pokemonImage">
-                    <img class="w-100" src="../assets/bulbasaur.png" alt="bulbasaur_image">
-                </div>
-            </article>
-            <article class="pokemon flex w-40 p-10 space-between white pointer">
-                <div>
-                    <h3>Bulbasaur</h3>
-                    <p>Plant</p>
-                    <p>Poison</p>
-                </div>
-                <div class="w-30 pokemonImage">
-                    <img class="w-100" src="../assets/bulbasaur.png" alt="bulbasaur_image">
-                </div>
-            </article>
-            <article class="pokemon flex w-40 p-10 space-between white pointer">
-                <div>
-                    <h3>Bulbasaur</h3>
-                    <p>Plant</p>
-                    <p>Poison</p>
-                </div>
-                <div class="w-30 pokemonImage">
-                    <img class="w-100" src="../assets/bulbasaur.png" alt="bulbasaur_image">
-                </div>
-            </article>
-            <article class="pokemon flex w-40 p-10 space-between white pointer">
-                <div>
-                    <h3>Bulbasaur</h3>
-                    <p>Plant</p>
-                    <p>Poison</p>
-                </div>
-                <div class="w-30 pokemonImage">
-                    <img class="w-100" src="../assets/bulbasaur.png" alt="bulbasaur_image">
-                </div>
-            </article>
-            <article class="pokemon flex w-40 p-10 space-between white pointer">
-                <div>
-                    <h3>Bulbasaur</h3>
-                    <p>Plant</p>
-                    <p>Poison</p>
-                </div>
-                <div class="w-30 pokemonImage">
-                    <img class="w-100" src="../assets/bulbasaur.png" alt="bulbasaur_image">
-                </div>
-            </article>
-            <article class="pokemon flex w-40 p-10 space-between white pointer">
-                <div>
-                    <h3>Bulbasaur</h3>
-                    <p>Plant</p>
-                    <p>Poison</p>
-                </div>
-                <div class="w-30 pokemonImage">
-                    <img class="w-100" src="../assets/bulbasaur.png" alt="bulbasaur_image">
-                </div>
-            </article>
+        <section class="flex space-around wrap" id="mainDiv">
+            
+        </section>
+        <section id="errorMessage">
+            <h1>¡OH NO!</h1>
+            <img src="../assets/sad_pikachu.png">
+            <h3>Theres an Error while fetching Pokemons <br><br>No Pokedex for now :c</h3>
+            <nav class="">
+                <p id="backArrow2" class="pointer" onclick="backHome()">&larr;<br>GO BACK</p>
+            </nav>
         </section>
     </div>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
 </html>
