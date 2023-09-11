@@ -9,6 +9,7 @@ const body = document.body;
 let isLoading = false;
 let isOnError = false;
 let isSearchBarDisplayed = false;
+let isOnSearchMode = false;
 let isInitialLoading = true;
 let currentPokemons = [];
 //const BASE_API_URL = "http://127.0.0.1:8081";
@@ -84,6 +85,7 @@ const toggleSearchBarVisibility = () => {
   if(isSearchBarDisplayed) {
     searchBarDiv.style.display = 'none';
     isSearchBarDisplayed = false;
+    isOnSearchMode = false;
   } else {
     searchBarDiv.style.display = 'block';
     isSearchBarDisplayed = true;
@@ -123,11 +125,16 @@ async function getPokemon() {
 async function getPokemonByName(pokemonName) {
   if(!isLoading) {
     if(!isOnError) {
+      if(pokemonName.length == 0) {
+        currentPokemons = [];
+        return getPokemon();
+      }
       try {
         showLoader();
 
         const response = await fetch(`${BASE_API_URL}/api/pokemon/search?name=${pokemonName}`);
         const fetchedPokemon = await response.json();
+        isOnSearchMode = true;
 
         currentPokemons = fetchedPokemon.spritesArray;
 
@@ -163,7 +170,7 @@ window.addEventListener('scroll', () => {
   // Define a threshold to start loading more items
   const scrollThreshold = 200;
 
-  if (documentHeight - scrollY - windowHeight < scrollThreshold) {
+  if (documentHeight - scrollY - windowHeight < scrollThreshold && !isOnSearchMode) {
     getPokemon();
   }
 });
