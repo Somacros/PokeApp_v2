@@ -5,6 +5,8 @@ const errorDiv = document.getElementById('errorMessage');
 const searchIcon = document.getElementById('search_button');
 const searchBarDiv = document.getElementById('pokedexSearchBarDiv');
 const searchBarInput = document.getElementById('pokedexSearchText');
+const searchButtonSubmit = document.getElementById('searchButtonSubmit');
+
 const body = document.body;
 let isLoading = false;
 let isOnError = false;
@@ -96,6 +98,17 @@ const handleEnterKeyPress = () => {
   getPokemonByName(searchBarInput.value);
 }
 
+const isMobileDevice = () => {
+  // Regular expression to match common mobile device keywords in the user agent string
+  const mobileKeywords = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+
+  // Get the user agent string from the browser
+  const userAgent = navigator.userAgent;
+
+  // Check if the user agent string matches any mobile keywords
+  return mobileKeywords.test(userAgent);
+}
+
 async function getPokemon() {
   if (!isLoading)
     if(!isOnError) {
@@ -155,12 +168,20 @@ searchIcon.addEventListener('click', () => {
   toggleSearchBarVisibility();
 });
 
-searchBarInput.addEventListener('keydown', function(event) {
-  if (event.key === 'Enter') {
+if(!isMobileDevice()) {
+  searchButtonSubmit.style.display = 'none';
+  searchBarInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleEnterKeyPress();
+    }
+  });
+} else {
+  searchButtonSubmit.addEventListener('click', (event) => {
     event.preventDefault();
     handleEnterKeyPress();
-  }
-});
+  })
+}
 
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY || window.pageYOffset;

@@ -90,8 +90,28 @@ body {
     padding: 20px;
 }
 
+.mt-10 {
+    margin-top: 10px;
+}
+
+.border-none {
+    border: none;
+}
+
 .h-auto {
     height: auto;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.border-radius-15 {
+    border-radius: 15px;
+}
+
+.border-radius-20 {
+    border-radius: 20px;
 }
 
 .gray {
@@ -336,7 +356,7 @@ body {
     display: none;
 }
 
-button {
+.mainNavItem {
     background: url(assets/pokeball_gray_left.png) no-repeat;
     background-position: center right;
     background-size: 52px;
