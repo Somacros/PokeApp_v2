@@ -11,7 +11,8 @@ const body = document.body;
 const params = getQueryParameters();
 const pokemonName = params.get('pokemonName');
 
-const BASE_API_URL = "http://127.0.0.1:8081";
+//const BASE_API_URL = "http://127.0.0.1:8081";
+const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
 const full_info_url = `${BASE_API_URL}/api/pokemon/full?pokemonName=${pokemonName}`;
 const currentURL = window.location.href;
 const urlParts = currentURL.split('/');
