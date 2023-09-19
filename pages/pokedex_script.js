@@ -21,9 +21,13 @@ function backHome () {
   window.location.href = '../index.html';
 }
 
+function openDetailsPage(pokemonName) {
+  window.location.href = `pokemon/pokemon.html?pokemonName=${pokemonName}`
+}
+
 const createCard = (pokemon) => {
   const card = `
-        <article class="pokemon flex p-10 space-between white pointer bg-${getPrimaryType(pokemon.types)}">
+        <article onclick="openDetailsPage('${pokemon.name.toLowerCase()}')" class="pokemon flex p-10 space-between white pointer bg-${getPrimaryType(pokemon.types)}">
             <div>
                 <h3>${pokemon.name}</h3>
                 ${createTypes(pokemon.types)}
@@ -45,7 +49,7 @@ const createTypes = (pokemonTypes) => {
     slot
   }) => {
     pokemonTypesAsHTML += `
-            <p>${type.name.toUpperCase()}</p>
+            <p class="pokemonType">${type.name.toUpperCase()}</p>
         `;
   });
 

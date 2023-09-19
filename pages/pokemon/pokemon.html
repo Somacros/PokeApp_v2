@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style.css">
+    <title>Pokemon Details</title>
+</head>
+<body>
+    <div class="loader bg-white">
+        <lottie-player src="../../assets/pokeball_loader.json" background="transparent"  speed="2"  style="width: 150px; height: 150px;" loop autoplay></lottie-player>
+        <h3>Loading more Pokemon...</h3>
+    </div>
+    <div class="p-20 mainApp text-center" id="mainApp">
+        <nav class="flex space-between align-center white">
+            <h3 id="backArrow" class="pointer" onclick="backPokedex()">&larr;</h3>
+        </nav>
+        <section id="mainPokemonDetails" class="flex space-around wrap white pb-20">
+        </section>
+        <div id="pokemonImage" class="w-100">
+        </div>
+    </div>
+    <section id="tabs" class="bg-white border-radius-15 text-center align-center pt-3">
+        <div class="flex space-around">
+            <div class="tab" onclick="openTab('about', this)">About</div>
+            <div class="tab" onclick="openTab('basestats', this)">Base Stats</div>
+            <div class="tab" onclick="openTab('evolution', this)">Evolution</div>
+            <div class="tab" onclick="openTab('moves', this)">Moves</div>
+        </div>
+
+        <div id="tabs_content" class="p-20">
+            <div class="tab-content" id="about">
+                <h3>ABOUT</h3>
+            </div>
+            <div class="tab-content" id="basestats">
+                <h3>BASE STATS</h3>
+            </div>
+            <div class="tab-content" id="evolution">
+                <h3>EVOLUTION CHAIN</h3>
+                <div id="evolutionChain">
+
+                </div>
+            </div>
+            <div class="tab-content" id="moves">
+                <h3>MOVES</h3>
+            </div>
+        </div>
+    </section>
+    <section id="errorMessage">
+        <h1>¡OH NO!</h1>
+        <img src="../../assets/sad_pikachu.png">
+        <h3>Theres an Error while fetching Pokemon's data <br><br>No Pokemon info for now :c</h3>
+        <nav class="">
+            <p id="backArrow2" class="pointer" onclick="backPokedex()">&larr;<br>GO BACK</p>
+        </nav>
+    </section>
+
+    <script src="pokemon_script.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</body>
+</html>
