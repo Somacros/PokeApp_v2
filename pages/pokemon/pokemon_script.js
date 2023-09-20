@@ -5,6 +5,8 @@ const pokemonDetailsDiv = document.getElementById('mainPokemonDetails');
 const mainAppDiv = document.getElementById('mainApp');
 const loader = document.querySelector('.loader');
 const errorDiv = document.getElementById('errorMessage');
+const pokemonSelector = document.getElementById("pokemonSelector");
+const pokemonInfoParagraph = document.getElementById("pokemonInfo");
 
 const body = document.body;
 
@@ -42,11 +44,13 @@ const fetchAllInformation = async () => {
         const data = await response.json();
         pokemonInfo = data.pokemonData;
 
-        console.log(pokemonInfo)
+        console.log(pokemonInfo);
 
         createEvolutionRows();
         setPokemonDetails();
         setPokemonImage();
+        setPokemonFlavorTexts();
+        setHeightWeight();
     } catch (error) {
         showError();
     } finally {
@@ -153,6 +157,42 @@ function showError() {
     errorDiv.style.display = 'block';
     body.style.overflow = 'hidden';
 }
+
+const setPokemonFlavorTexts = () => {
+    const flavorTextsArray = pokemonInfo.flavor_text_entries;
+
+    for(let i = 0; i < flavorTextsArray.length; i++) {
+        const flavorText = flavorTextsArray[i];
+
+        let option = document.createElement('option');
+        option.value = flavorText.version.name;
+        option.innerHTML =  flavorText.version.name.toUpperCase();
+
+        pokemonSelector.appendChild(option);
+    };
+
+    updateFlavorText();
+};
+
+const updateFlavorText = () => {
+    const selectedVersion = pokemonSelector.value;
+    const info = pokemonInfo.flavor_text_entries.find(flavor => {
+        return flavor.version.name == selectedVersion;
+    });
+
+    pokemonInfoParagraph.textContent = info.flavor_text;
+}
+
+const setHeightWeight = () => {
+    const heightText = document.getElementById('heightText');
+    const weightText = document.getElementById('weightText');
+    heightText.textContent = `${(pokemonInfo.height/10).toFixed(2)} m`;
+    weightText.textContent = `${(pokemonInfo.weight/10).toFixed(2)} kg`
+};
+
+pokemonSelector.addEventListener("change", function () {
+    updateFlavorText();
+});
 
 restartButtons();
 openTab('about', tabsButtons[0]);

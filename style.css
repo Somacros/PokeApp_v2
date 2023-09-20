@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family:'Roboto', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
     background-color: #F5F5F5;
     overflow-x: hidden;
@@ -169,7 +169,23 @@ body {
 }
 
 .f-s {
-    font-size: 12px;
+    font-size: 0.8rem;
+}
+
+.f-m {
+    font-size: 1.4rem;
+}
+
+.f-gray {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.bolder {
+    font-weight: bolder;
 }
 
 .bg-grass {
@@ -479,6 +495,20 @@ body {
     border: none;
 }
 
+#pokemonSelector {
+    background-color: rgba(128, 128, 128, 0.11);
+    border-radius: 8px;
+    height: 34px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#pokemonInfo {
+    border: 2px solid rgba(0, 0, 0, 0.301);
+    padding: 1.5em 0.5em;
+}
+
 .selected {
     border-bottom: #506be49f 2px solid;
 }
@@ -507,6 +537,11 @@ button:hover {
 button:active {
     transform: translateY(10px);
     transition-duration: 500ms;
+}
+
+pre {
+    font-family: 'Roboto', Courier, monospace;
+    white-space: pre-wrap;
 }
 
 @media (min-width: 0px) {

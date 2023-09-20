@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style.css">
     <title>Pokemon Details</title>
 </head>
+
 <body>
     <div class="loader bg-white">
-        <lottie-player src="../../assets/pokeball_loader.json" background="transparent"  speed="2"  style="width: 150px; height: 150px;" loop autoplay></lottie-player>
+        <lottie-player src="../../assets/pokeball_loader.json" background="transparent" speed="2"
+            style="width: 150px; height: 150px;" loop autoplay></lottie-player>
         <h3>Loading more Pokemon...</h3>
     </div>
     <div class="p-20 mainApp text-center" id="mainApp">
@@ -31,6 +34,22 @@
         <div id="tabs_content" class="p-20">
             <div class="tab-content" id="about">
                 <h3>ABOUT</h3>
+                <label for="pokemonSelector">
+                <select id="pokemonSelector">
+                </select>
+
+                <pre id="pokemonInfo">Pokemon information will be displayed here.</pre>
+
+                <div class="flex space-around f-m">
+                    <div>
+                        <p id="weightText" class="bolder f-m">9.99kg</p>
+                        <p class="f-s bold f-gray">WEIGHT</p>
+                    </div>
+                    <div>
+                        <p id="heightText" class="bolder f-m">9.99m</p>
+                        <p class="f-s bold f-gray">HEIGHT</p>
+                    </div>
+                </div>
             </div>
             <div class="tab-content" id="basestats">
                 <h3>BASE STATS</h3>
@@ -58,4 +77,5 @@
     <script src="pokemon_script.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
+
 </html>
