@@ -7,19 +7,24 @@ const loader = document.querySelector('.loader');
 const errorDiv = document.getElementById('errorMessage');
 const pokemonSelector = document.getElementById("pokemonSelector");
 const pokemonInfoParagraph = document.getElementById("pokemonInfo");
+const fillElement = document.querySelector('.fill');
 
 const body = document.body;
 
 const params = getQueryParameters();
 const pokemonName = params.get('pokemonName');
 
-//const BASE_API_URL = "http://127.0.0.1:8081";
-const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
+const BASE_API_URL = "http://127.0.0.1:8081";
+//const BASE_API_URL = "https://thoughtful-girdle-frog.cyclic.app";
 const full_info_url = `${BASE_API_URL}/api/pokemon/full?pokemonName=${pokemonName}`;
 const currentURL = window.location.href;
 const urlParts = currentURL.split('/');
 const pokemonId = urlParts[urlParts.length - 1];
 let isLoading = false;
+const baseStats = {
+    minValue: 4,
+    maxValue: 255
+};
 
 let pokemonInfo = {};
 
@@ -46,11 +51,9 @@ const fetchAllInformation = async () => {
 
         console.log(pokemonInfo);
 
-        createEvolutionRows();
         setPokemonDetails();
         setPokemonImage();
-        setPokemonFlavorTexts();
-        setHeightWeight();
+        openTab('about', tabsButtons[0]);
     } catch (error) {
         showError();
     } finally {
@@ -76,6 +79,23 @@ function openTab(tabName, tabDiv) {
     tabDiv.classList.add('selected');
 
     document.getElementById(tabName).style.display = "block";
+
+    switch (tabName) {
+        case 'about':
+            setAboutPage();
+            break;
+        case 'basestats':
+            setBaseStats();
+            break;
+        case 'evolution':
+            createEvolutionRows();
+            break;
+        case 'moves':
+            console.log('Holis');
+            break;
+        default:
+            break;
+    }
 };
 
 const createEvolutionRows = () => {
@@ -161,12 +181,12 @@ function showError() {
 const setPokemonFlavorTexts = () => {
     const flavorTextsArray = pokemonInfo.flavor_text_entries;
 
-    for(let i = 0; i < flavorTextsArray.length; i++) {
+    for (let i = 0; i < flavorTextsArray.length; i++) {
         const flavorText = flavorTextsArray[i];
 
         let option = document.createElement('option');
         option.value = flavorText.version.name;
-        option.innerHTML =  flavorText.version.name.toUpperCase();
+        option.innerHTML = flavorText.version.name.toUpperCase();
 
         pokemonSelector.appendChild(option);
     };
@@ -190,10 +210,40 @@ const setHeightWeight = () => {
     weightText.textContent = `${(pokemonInfo.weight/10).toFixed(2)} kg`
 };
 
+const setAboutPage = () => {
+    setPokemonFlavorTexts();
+    setHeightWeight();
+}
+
+const getFillPercentage = (currentValue) => {
+    const {
+        minValue,
+        maxValue
+    } = baseStats;
+    return ((currentValue - minValue) / (maxValue - minValue)) * 100;
+};
+
+const setBaseStats = () => {
+    const {
+        stats,
+        ...rest
+    } = pokemonInfo;
+
+    stats.forEach(stat => {
+        const statFillBar = document.getElementById(`${stat.stat.name}_stat`);
+        const fillPercentage = getFillPercentage(stat.base_stat);
+
+        statFillBar.style.width = `0%`;
+        statFillBar.textContent = stat.base_stat;
+        setTimeout(()=> {
+            statFillBar.style.width = `${fillPercentage}%`;
+        }, 100);
+    });
+};
+
 pokemonSelector.addEventListener("change", function () {
     updateFlavorText();
 });
 
 restartButtons();
-openTab('about', tabsButtons[0]);
 fetchAllInformation();

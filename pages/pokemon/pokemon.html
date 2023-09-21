@@ -23,8 +23,8 @@
         <div id="pokemonImage" class="w-100">
         </div>
     </div>
-    <section id="tabs" class="bg-white border-radius-15 text-center align-center pt-3">
-        <div class="flex space-around">
+    <section id="tabs" class="flex wrap space-around  border-radius-15 text-center align-center pt-3">
+        <div class="flex space-around" id="tab-buttons">
             <div class="tab" onclick="openTab('about', this)">About</div>
             <div class="tab" onclick="openTab('basestats', this)">Base Stats</div>
             <div class="tab" onclick="openTab('evolution', this)">Evolution</div>
@@ -53,11 +53,53 @@
             </div>
             <div class="tab-content" id="basestats">
                 <h3>BASE STATS</h3>
+                <div id="baseStats" class="flex wrap space-around">
+
+                    <div class="w-40 mt-10">
+                        <label for="hp_stat">HP</label>
+                        <div class="filled-bar">
+                            <div class="fill" id="hp_stat"></div>
+                        </div>
+                    </div>
+                    <div class="w-40 mt-10">
+                        <label for="attack_stat">ATTACK</label>
+                        <div class="filled-bar">
+                            <div class="fill" id="attack_stat"></div>
+                        </div>
+                    </div>
+                    <div class="w-40 mt-10">
+                        <label for="defense_stat">DEFENSE</label>
+                        <div class="filled-bar">
+                            <div class="fill" id="defense_stat"></div>
+                        </div>
+                    </div>
+                    <div class="w-40 mt-10">
+                        <label for="sp_attack_stat">SP. ATTACK</label>
+                        <div class="filled-bar">
+                            <div class="fill" id="special-attack_stat"></div>
+                        </div>
+                    </div>
+                    <div class="w-40 mt-10">
+                        <label for="sp_defense_stat">SP. DEFENSE</label>
+                        <div class="filled-bar">
+                            <div class="fill" id="special-defense_stat"></div>
+                        </div>
+                    </div>
+                    <div class="w-40 mt-10">
+                        <label for="speed_stat">SPEED</label>
+                        <div class="filled-bar">
+                            <div class="fill" id="speed_stat"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-content" id="evolution">
                 <h3>EVOLUTION CHAIN</h3>
                 <div id="evolutionChain">
-
+                    <div>
+                        <img src="../../assets/pokeball_shine.png" alt="" width="92px" height="92px">
+                        <h4 class="gray">This pokemon doesn't have an evolution chain</h4>
+                    </div>
                 </div>
             </div>
             <div class="tab-content" id="moves">
