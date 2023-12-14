@@ -317,6 +317,22 @@ body {
     font-size: 3em;
 }
 
+.fs-2 {
+    font-size: 2.5em;
+}
+
+.fs-3 {
+    font-size: 2em;
+}
+
+.fs-4 {
+    font-size: 1.5em;
+}
+
+.fs-5 {
+    font-size: 1em;
+}
+
 #searchText, #pokedexSearchText {
     border: none;
     width: 85%;
@@ -508,20 +524,18 @@ body {
     max-width: 160px;
 }
 
-#evolutionItem {
+.evolutionItem {
     margin-top: 30px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.438);
-    padding-bottom: 50px;
-}
-
-#evolutionChain p {
-    font-size: 20px;
-    font-weight: 600;
-    color: gray;
+    padding: 0px 0px 30px 0px;
 }
 
 #evolutionChain :last-child {
     border: none;
+}
+
+#evolutionChain {
+    overflow-y: auto;
 }
 
 #pokemonSelector {
@@ -610,5 +624,15 @@ pre {
 @media (min-width: 1200px) {
     .pokemon {
         width: 20%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .tab {
+        font-size: 0.9em;
+    }
+
+    .evolutionItem {
+        font-size: 1em;
     }
 }

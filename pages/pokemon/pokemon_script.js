@@ -110,7 +110,7 @@ const createEvolutionRows = () => {
         pokemonInfo.evolution_chain.forEach(evolution => {
 
             const localEvoChainDiv = document.createElement('div');
-            localEvoChainDiv.id = 'evolutionItem';
+            localEvoChainDiv.classList.add('evolutionItem');
             localEvoChainDiv.classList.add('flex');
             localEvoChainDiv.classList.add('space-around');
             localEvoChainDiv.classList.add('px-5');
@@ -132,7 +132,11 @@ const createEvolutionRows = () => {
 
             const levelText = document.createElement('p')
             levelText.classList.add('w-20');
-            levelText.innerText = `LV.${evolution.min_level}`;
+            levelText.classList.add('fs-5');
+            levelText.classList.add('bold');
+            levelText.classList.add('gray');
+            levelText.classList.add('align-center');
+            levelText.innerHTML = `&rarr;<br>LV.${evolution.min_level}`
 
             localEvoChainDiv.appendChild(previousPokemonDiv);
             localEvoChainDiv.appendChild(levelText);
@@ -145,16 +149,18 @@ const createEvolutionRows = () => {
 
 const createEvolutionCard = (evolution) => {
     const pokemonDiv = document.createElement('div');
-    pokemonDiv.classList.add('w-30');
+    pokemonDiv.classList.add('w-40');
     pokemonDiv.classList.add('pointer');
 
     const pokemonIMG = document.createElement('img');
     pokemonIMG.src = evolution.drawing;
     pokemonIMG.alt = evolution.name;
+    pokemonIMG.classList.add('w-100')
 
     const pokemonName = document.createElement('p');
-    pokemonName.classList.add('fs-1');
     pokemonName.innerText = evolution.name;
+    pokemonName.classList.add('fs-5');
+    pokemonName.classList.add('gray');
 
     pokemonDiv.addEventListener('click', () => {
         changePokemonInformation(evolution.name.toLowerCase());
