@@ -38,6 +38,10 @@ const backPokedex = () => {
     window.location.href = '../pokedex.html'
 }
 
+function changePokemonInformation(pokemonName) {
+    window.location.href = `./pokemon.html?pokemonName=${pokemonName}`;
+}
+
 const getPrimaryType = (pokemonTypes) => {
     return pokemonTypes[0].type.name;
 };
@@ -100,23 +104,67 @@ function openTab(tabName, tabDiv) {
 
 const createEvolutionRows = () => {
     if (pokemonInfo && pokemonInfo.evolution_chain && pokemonInfo.evolution_chain.length) {
-        let evolutionRowsHTML = '';
+
+        evolutionChainDiv.innerHTML = '';
 
         pokemonInfo.evolution_chain.forEach(evolution => {
-            evolutionRowsHTML += `
-            <div class='flex space-around px-5 align-center mt-30'>
-                <img src="${evolution.previous_drawing}" alt="${evolution.previous_name}_sprite" class="w-30">
-                <p class="w-20">&rarr;<br>LV.${evolution.min_level}</p>
-                <img src="${evolution.evolve_drawing}" alt="${evolution.evolve_name}_sprite" class="w-30">
-            </div>
-            `;
-        });
 
-        if (evolutionRowsHTML) {
-            evolutionChainDiv.innerHTML = evolutionRowsHTML;
-        }
+            const localEvoChainDiv = document.createElement('div');
+            localEvoChainDiv.id = 'evolutionItem';
+            localEvoChainDiv.classList.add('flex');
+            localEvoChainDiv.classList.add('space-around');
+            localEvoChainDiv.classList.add('px-5');
+            localEvoChainDiv.classList.add('align-center');
+            localEvoChainDiv.classList.add('mt-30');
+
+            const previousPokemon = { 
+                name: evolution.previous_name,
+                drawing: evolution.previous_drawing
+            };
+
+            const nextPokemon = {
+                name: evolution.evolve_name,
+                drawing: evolution.evolve_drawing
+            };
+
+            const previousPokemonDiv = createEvolutionCard(previousPokemon);
+            const nextPokemonDiv = createEvolutionCard(nextPokemon);
+
+            const levelText = document.createElement('p')
+            levelText.classList.add('w-20');
+            levelText.innerText = `LV.${evolution.min_level}`;
+
+            localEvoChainDiv.appendChild(previousPokemonDiv);
+            localEvoChainDiv.appendChild(levelText);
+            localEvoChainDiv.appendChild(nextPokemonDiv);
+
+            evolutionChainDiv.appendChild(localEvoChainDiv);
+        });
     }
 };
+
+const createEvolutionCard = (evolution) => {
+    const pokemonDiv = document.createElement('div');
+    pokemonDiv.classList.add('w-30');
+    pokemonDiv.classList.add('pointer');
+
+    const pokemonIMG = document.createElement('img');
+    pokemonIMG.src = evolution.drawing;
+    pokemonIMG.alt = evolution.name;
+
+    const pokemonName = document.createElement('p');
+    pokemonName.classList.add('fs-1');
+    pokemonName.innerText = evolution.name;
+
+    pokemonDiv.addEventListener('click', () => {
+        changePokemonInformation(evolution.name.toLowerCase());
+    });
+
+    pokemonDiv.appendChild(pokemonIMG);
+    pokemonDiv.appendChild(pokemonName);
+
+    return pokemonDiv;
+}
 
 const setPokemonImage = () => {
     let pokemonImageHTML = `

@@ -22,7 +22,7 @@ function backHome () {
 }
 
 function openDetailsPage(pokemonName) {
-  window.location.href = `pokemon/pokemon.html?pokemonName=${pokemonName}`
+  window.location.href = `pokemon/pokemon.html?pokemonName=${pokemonName}`;
 }
 
 const createCard = (pokemon) => {

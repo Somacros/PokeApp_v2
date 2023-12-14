@@ -313,6 +313,10 @@ body {
     padding: 20px 20px;
 }
 
+.fs-1 {
+    font-size: 3em;
+}
+
 #searchText, #pokedexSearchText {
     border: none;
     width: 85%;
@@ -504,7 +508,7 @@ body {
     max-width: 160px;
 }
 
-#evolutionChain div {
+#evolutionItem {
     margin-top: 30px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.438);
     padding-bottom: 50px;
