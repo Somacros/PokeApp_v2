@@ -1,11 +1,13 @@
 const tabsButtons = document.getElementsByClassName('tab');
 const evolutionChainDiv = document.getElementById('evolutionChain');
+const movesDiv = document.getElementById('movesDiv');
 const pokemonImageDiv = document.getElementById('pokemonImage');
 const pokemonDetailsDiv = document.getElementById('mainPokemonDetails');
 const mainAppDiv = document.getElementById('mainApp');
 const loader = document.querySelector('.loader');
 const errorDiv = document.getElementById('errorMessage');
 const pokemonSelector = document.getElementById("pokemonSelector");
+const movesVersionSelector = document.getElementById('movesVersionSelector');
 const pokemonInfoParagraph = document.getElementById("pokemonInfo");
 const fillElement = document.querySelector('.fill');
 
@@ -27,6 +29,7 @@ const baseStats = {
 };
 
 let pokemonInfo = {};
+let movesByVersion = {};
 
 function getQueryParameters() {
     const queryString = window.location.search;
@@ -55,6 +58,7 @@ const fetchAllInformation = async () => {
 
         console.log(pokemonInfo);
 
+        setPokemonMovesByGame();
         setPokemonDetails();
         setPokemonImage();
         openTab('about', tabsButtons[0]);
@@ -95,7 +99,7 @@ function openTab(tabName, tabDiv) {
             createEvolutionRows();
             break;
         case 'moves':
-            console.log('Holis');
+            createMovesContent();
             break;
         default:
             break;
@@ -117,7 +121,7 @@ const createEvolutionRows = () => {
             localEvoChainDiv.classList.add('align-center');
             localEvoChainDiv.classList.add('mt-30');
 
-            const previousPokemon = { 
+            const previousPokemon = {
                 name: evolution.previous_name,
                 drawing: evolution.previous_drawing
             };
@@ -232,6 +236,114 @@ function showError() {
     body.style.overflow = 'hidden';
 }
 
+const setPokemonMovesByGame = () => {
+    let versionMoves = {};
+
+    for (let i = 0; i < pokemonInfo.moves.length; i++) {
+        const move = pokemonInfo.moves[i];
+        const move_name = (move.move.name.charAt(0).toUpperCase() + move.move.name.slice(1)).replaceAll('-', ' ');
+
+        for (let j = 0; j < move.version_group_details.length; j++) {
+            const move_details = move.version_group_details[j];
+            const move_version = move_details.version_group.name.replaceAll('-', '_');
+            const move_way = move_details.move_learn_method.name.replaceAll('-', '_');
+            const move_level_at = move_details.level_learned_at;
+
+            if (!versionMoves.hasOwnProperty(move_version)) {
+                versionMoves[move_version] = {
+                    machine: [],
+                    level_up: [],
+                    tutor: [],
+                    egg: []
+                };
+            }
+
+            const moveObj = {
+                name: move_name,
+                level: move_level_at
+            };
+
+            versionMoves[move_version][move_way].push(moveObj);
+        }
+    }
+
+    movesByVersion = versionMoves;
+    setMovesByVersionSelector();
+}
+
+const setMovesByVersionSelector = () => {
+    for (const version in movesByVersion) {
+        let option = document.createElement('option');
+        option.value = version;
+        option.innerHTML = version.replaceAll('_',' ').toUpperCase();
+        movesVersionSelector.appendChild(option);
+    }
+}
+
+const createMovesContent = () => {
+    const versionMoves = movesByVersion[movesVersionSelector.value];
+    movesDiv.innerHTML = '';
+
+    for (const learnWay in versionMoves) {
+        if (Object.hasOwnProperty.call(versionMoves, learnWay)) {
+            const movesArray = versionMoves[learnWay];
+            const movesTableDiv = createMovesTable(movesArray, learnWay);
+            movesDiv.append(movesTableDiv);
+        }
+    }
+}
+
+const createMovesTable = (movesArray, learnWay) => {
+    const movement = document.createElement('div');
+    movement.classList.add('movesTableDiv');
+    movement.classList.add('w-40');
+
+    const tableLabel = document.createElement('h3');
+    tableLabel.classList.add('w-100');
+    tableLabel.innerHTML = learnWay.replaceAll('_', ' ').toUpperCase();
+
+    movement.appendChild(tableLabel);
+
+    const table = document.createElement('table');
+    table.classList.add('movesTable');
+    table.classList.add('w-100');
+
+    const thead = document.createElement('thead');
+    const theadLevel = document.createElement('th');
+    theadLevel.innerText = "Lv.";
+    const theadMove = document.createElement('th');
+    theadMove.innerText = "Move";
+
+    thead.appendChild(theadLevel);
+    thead.appendChild(theadMove);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    if(learnWay == 'level_up') {
+        movesArray.sort((prev, next) => prev.level - next.level);
+    }
+
+    for (let i = 0; i < movesArray.length; i++) {
+        const move = movesArray[i];
+        const tableTr = document.createElement('tr');
+        const tdLevel = document.createElement('td');
+        tdLevel.innerHTML = move.level;
+
+        const tdName = document.createElement('td');
+        tdName.innerHTML = move.name;
+
+        tableTr.appendChild(tdLevel);
+        tableTr.appendChild(tdName);
+        tbody.appendChild(tableTr);
+    }
+
+    table.appendChild(tbody);
+    movement.appendChild(table);
+
+    return movement;
+}
+
 const setPokemonFlavorTexts = () => {
     const flavorTextsArray = pokemonInfo.flavor_text_entries;
 
@@ -260,8 +372,8 @@ const updateFlavorText = () => {
 const setHeightWeight = () => {
     const heightText = document.getElementById('heightText');
     const weightText = document.getElementById('weightText');
-    heightText.textContent = `${(pokemonInfo.height/10).toFixed(2)} m`;
-    weightText.textContent = `${(pokemonInfo.weight/10).toFixed(2)} kg`
+    heightText.textContent = `${(pokemonInfo.height / 10).toFixed(2)} m`;
+    weightText.textContent = `${(pokemonInfo.weight / 10).toFixed(2)} kg`
 };
 
 const setAboutPage = () => {
@@ -289,7 +401,7 @@ const setBaseStats = () => {
 
         statFillBar.style.width = `0%`;
         statFillBar.textContent = stat.base_stat;
-        setTimeout(()=> {
+        setTimeout(() => {
             statFillBar.style.width = `${fillPercentage}%`;
         }, 100);
     });
@@ -298,6 +410,10 @@ const setBaseStats = () => {
 pokemonSelector.addEventListener("change", function () {
     updateFlavorText();
 });
+
+movesVersionSelector.addEventListener("change", function(e) {
+    createMovesContent();
+})
 
 restartButtons();
 fetchAllInformation();

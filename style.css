@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
-    font-family:'Roboto', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Roboto', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
     background-color: #F5F5F5;
     overflow-x: hidden;
@@ -19,7 +19,7 @@ body {
 }
 
 .headerApp {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 600;
     font-size: 36px;
     width: 100%;
@@ -333,7 +333,8 @@ body {
     font-size: 1em;
 }
 
-#searchText, #pokedexSearchText {
+#searchText,
+#pokedexSearchText {
     border: none;
     width: 85%;
     line-height: 38px;
@@ -360,7 +361,7 @@ body {
 }
 
 #tab-buttons {
-    width:100%;
+    width: 100%;
 }
 
 #tabs_content {
@@ -381,7 +382,7 @@ body {
 }
 
 .tab-content {
-    display:none;
+    display: none;
 }
 
 .mainLinks {
@@ -434,7 +435,7 @@ body {
 .loader {
     display: none;
     position: fixed;
-    top:50%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 100%;
@@ -473,7 +474,7 @@ body {
 
 #pokedex {
     background-color: #4EC2A7;
-    box-shadow: 0px 5px 8px #4ec2a7d5 ;
+    box-shadow: 0px 5px 8px #4ec2a7d5;
 }
 
 #Moves {
@@ -538,13 +539,14 @@ body {
     overflow-y: auto;
 }
 
-#pokemonSelector {
+.selector {
     background-color: rgba(128, 128, 128, 0.11);
     border-radius: 8px;
     height: 34px;
     text-align: center;
     font-size: 14px;
     cursor: pointer;
+    width: 80%;
 }
 
 #pokemonInfo {
@@ -554,19 +556,23 @@ body {
 
 .filled-bar {
     width: 100%;
-    height: 20px; /* Adjust the height as needed */
+    height: 20px;
+    /* Adjust the height as needed */
     background-color: #d4d4d4;
     position: relative;
-  }
-  
-  /* Styles for the filled portion */
-  .fill {
+}
+
+/* Styles for the filled portion */
+.fill {
     color: white;
     height: 100%;
-    background-color: #007bff; /* Fill color */
-    width: 0; /* Initially, the width is 0, it will be updated using JavaScript */
-    transition: width 0.5s; /* Add a smooth transition effect */
-  }
+    background-color: #007bff;
+    /* Fill color */
+    width: 0;
+    /* Initially, the width is 0, it will be updated using JavaScript */
+    transition: width 0.5s;
+    /* Add a smooth transition effect */
+}
 
 .selected {
     border-bottom: #506be49f 2px solid;
@@ -587,6 +593,16 @@ body {
     font-weight: 600;
     color: white;
     text-align: left;
+}
+
+.movesTable {
+    text-align: center;
+}
+
+.movesTable thead {
+    line-height: 2em;
+    background-color: rgb(219, 219, 219);
+
 }
 
 button:hover {
@@ -634,5 +650,9 @@ pre {
 
     .evolutionItem {
         font-size: 1em;
+    }
+
+    .movesTableDiv {
+        width: 60%;
     }
 }
