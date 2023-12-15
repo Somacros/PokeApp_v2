@@ -251,8 +251,8 @@ const setPokemonMovesByGame = () => {
 
             if (!versionMoves.hasOwnProperty(move_version)) {
                 versionMoves[move_version] = {
-                    machine: [],
                     level_up: [],
+                    machine: [],
                     tutor: [],
                     egg: []
                 };
