@@ -148,8 +148,8 @@ async function getPokemonByName(pokemonName) {
       }
       try {
         showLoader();
-        var response = await fetch(`${BASE_API_URL}/api/pokemon/search?name=${pokemonName.toLowerCase()}`);
-        var fetchedPokemon = await response.json();
+        const response = await fetch(`${BASE_API_URL}/api/pokemon/search?name=${pokemonName.toLowerCase()}`);
+        const fetchedPokemon = await response.json();
         isOnSearchMode = true;
 
         currentPokemons = fetchedPokemon.spritesArray;
